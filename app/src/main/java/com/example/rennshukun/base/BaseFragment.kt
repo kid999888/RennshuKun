@@ -15,10 +15,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 
 abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewModel> : Fragment() {
     // 自身管理したbindingデータ
-    private lateinit var binding: TBinding
+    lateinit var binding: TBinding
 
     // 自身管理したviewModelデータ
     protected abstract val viewModel: TViewModel
@@ -42,15 +43,23 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
             // 画面初期化処理
             setupBinding(inflater, container)
             afterBinding()
-            setViewClickListener()
         }
 
         if (binding.lifecycleOwner != viewLifecycleOwner) {
             binding.lifecycleOwner = viewLifecycleOwner
         }
 
-        setViewModelObserve()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpUI()
+        setViewClickListener()
+        viewLifecycleOwner.let { viewLifecycleOwner ->
+            setViewModelObserve(viewLifecycleOwner)
+        }
+
     }
 
     /**
@@ -70,10 +79,16 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     }
 
     /**
-     * ViewModel監視を設定する
+     * Binding直後処理
      *
      */
     protected open fun afterBinding() {}
+
+    /**
+     * UI内容設定
+     *
+     */
+    protected open fun setUpUI() {}
 
     /**
      * View内クリックリスナー
@@ -85,9 +100,11 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
      * ViewModel監視を設定する
      *
      */
-    protected open fun setViewModelObserve() {
-        viewLifecycleOwner.let { owner ->
+    protected open fun setViewModelObserve(viewLifecycleOwner: LifecycleOwner) {}
 
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // binding取り消す
+        binding.unbind()
     }
 }

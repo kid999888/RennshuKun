@@ -10,17 +10,13 @@ package com.example.rennshukun.view
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.rennshukun.R
+import com.example.rennshukun.base.BaseActivity
 import com.example.rennshukun.databinding.ActivityMainBinding
 import com.example.rennshukun.room.dao.ApplicationManagementDao
 import com.example.rennshukun.room.model.ApplicationManagementEntity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.util.UUID
@@ -29,7 +25,7 @@ import java.util.UUID
  * MainActivity
  *
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private val applicationManagementDao: ApplicationManagementDao by inject()
 
@@ -53,19 +49,18 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "UUID exists: $uuid", Toast.LENGTH_LONG).show()
             }
         }
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications,
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        // ナビゲーション情報設定
+        setUpNavgate()
+    }
+
+    private fun setUpNavgate() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        val navInflater = navController.navInflater
+        val navGraph = navInflater.inflate(R.navigation.nav_graph)
+        navController.graph = navGraph
     }
 
 }
