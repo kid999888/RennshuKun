@@ -16,6 +16,7 @@ kdoc = "1.9.20"
 databindingRuntime = "8.4.0"
 room = "2.6.0"
 devtoolsKsp = "1.9.0-1.0.13"
+koin = "3.5.6"
 
 
 [libraries]
@@ -34,6 +35,10 @@ androidx-databinding-runtime = { group = "androidx.databinding", name = "databin
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-android-compat = { module = "io.insert-koin:koin-android-compat", version.ref = "koin" }
+koin-androidx-navigation = { module = "io.insert-koin:koin-androidx-navigation", version.ref = "koin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

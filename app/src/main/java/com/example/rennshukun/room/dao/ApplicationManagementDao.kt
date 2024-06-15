@@ -7,6 +7,9 @@ import com.example.rennshukun.room.model.ApplicationManagementEntity
 
 @Dao
 interface ApplicationManagementDao : BaseDao<ApplicationManagementEntity> {
-    @Query("SELECT * FROM application_management WHERE uuid = :uuid")
-    suspend fun getApplicationManagement(uuid: String): ApplicationManagementEntity?
+    @Query("SELECT * FROM application_management LIMIT 1")
+    suspend fun getFirstApplicationManagement(): ApplicationManagementEntity?
+
+    @Query("SELECT uuid FROM application_management LIMIT 1")
+    suspend fun getFirstUuid(): String?
 }

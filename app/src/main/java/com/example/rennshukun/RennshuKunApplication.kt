@@ -14,6 +14,10 @@ import com.example.rennshukun.room.RennshuKunDatabase
 import com.example.rennshukun.room.model.ApplicationManagementEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
+import org.koin.dsl.module
 import java.util.UUID
 
 /**
@@ -24,18 +28,22 @@ class RennshuKunApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val db = RennshuKunDatabase.getDatabase(this)
-        val dao = db.applicationManagementDao()
 
-        GlobalScope.launch {
-            val applicationManagementEntity = dao.getApplicationManagement("app_management_uuid")
-            if (applicationManagementEntity == null) {
-                val newUUID = UUID.randomUUID().toString()
-                dao.insert(ApplicationManagementEntity(uuid = newUUID))
-                Log.d("UUID", "Generated new UUID: $newUUID")
-            } else {
-                Log.d("UUID", "Existing UUID: ${applicationManagementEntity.uuid}")
-            }
+        startKoin {
+            // Log Koin into Android logger
+            androidLogger()
+            // Reference Android context
+            androidContext(this@RennshuKunApplication)
+            modules(rennshuKunAppModule)
         }
+    }
+
+    private val rennshuKunAppModule = module {
+        // RennshuKunDatabase
+        single { RennshuKunDatabase.getDatabase(androidContext()) }
+
+        // DB
+        single { get<RennshuKunDatabase>().applicationManagementDao() }
+
     }
 }

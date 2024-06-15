@@ -21,10 +21,20 @@ abstract class RennshuKunDatabase : RoomDatabase() {
                     context.applicationContext,
                     RennshuKunDatabase::class.java,
                     "rennshu_kun_database"
-                ).build()
+                )
+                    //.addMigrations(DemoDatabase.MIGRATION_1_to_2) // TODO: マイグレーションの時に追加必要
+                    //.fallbackToDestructiveMigration() // TODO: マイグレーションの時に追加必要(旧データ保存必要ないの場合)
+                    .build()
                 INSTANCE = instance
                 instance
             }
+
+            // TODO : マイグレーションの時に追加必要
+//        val MIGRATION_1_to_2 = object : Migration(1, 2) {
+//            override fun migrate(database: SupportSQLiteDatabase) {
+//                // マイグレーション処理
+//            }
+//        }
         }
     }
 }
