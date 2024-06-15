@@ -1,12 +1,12 @@
 /**
- * File Name: HomeFragment.kt
+ * File Name: DashboardFragment.kt
  * Project Name: Rennshu Kun
  * Creator: Gyoushin Ou
  * Creation Date: 2024/05/13
  * Copyright: © 2024 Gyoushin Ou. All rights reserved.
  * Description: This file implements...
  */
-package com.example.rennshukun.view.home
+package com.example.rennshukun.view.main.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,15 +15,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.rennshukun.databinding.FragmentHomeBinding
+import com.example.rennshukun.databinding.FragmentDashboardBinding
 
 /**
- * HomeFragment
+ * DashboardFragment
  *
  */
-class HomeFragment : Fragment() {
+class DashboardFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -34,14 +34,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val dashboardViewModel =
+            ViewModelProvider(this).get(DashboardViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textDashboard
+        dashboardViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

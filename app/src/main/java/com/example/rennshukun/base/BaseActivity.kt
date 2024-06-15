@@ -10,6 +10,5 @@ package com.example.rennshukun.base
 
 import androidx.appcompat.app.AppCompatActivity
 
-class BaseActivity : AppCompatActivity() {
-    
+open class BaseActivity : AppCompatActivity() {
 }

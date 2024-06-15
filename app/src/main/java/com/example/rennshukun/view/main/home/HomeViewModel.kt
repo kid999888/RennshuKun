@@ -6,7 +6,7 @@
  * Copyright: © 2024 Gyoushin Ou. All rights reserved.
  * Description: This file implements...
  */
-package com.example.rennshukun.view.home
+package com.example.rennshukun.view.main.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -11,5 +11,5 @@ interface ApplicationManagementDao : BaseDao<ApplicationManagementEntity> {
     suspend fun getFirstApplicationManagement(): ApplicationManagementEntity?
 
     @Query("SELECT uuid FROM application_management LIMIT 1")
-    suspend fun getFirstUuid(): String?
+    suspend fun getUuid(): String?
 }

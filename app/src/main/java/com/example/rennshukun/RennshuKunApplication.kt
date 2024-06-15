@@ -9,23 +9,21 @@
 package com.example.rennshukun
 
 import android.app.Application
-import android.util.Log
+import com.example.rennshukun.repository.ApplicationManagementRepository
 import com.example.rennshukun.room.RennshuKunDatabase
-import com.example.rennshukun.room.model.ApplicationManagementEntity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.rennshukun.view.main.viewModel.MainViewModel
+import com.example.rennshukun.view.splash.viewModel.SplashViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.dsl.module
-import java.util.UUID
 
 /**
  * RennshuKunApplication
  *
  */
 class RennshuKunApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
 
@@ -45,5 +43,11 @@ class RennshuKunApplication : Application() {
         // DB
         single { get<RennshuKunDatabase>().applicationManagementDao() }
 
+        // Repository
+        single { ApplicationManagementRepository(get()) }
+
+        // ViewModel
+        viewModel { SplashViewModel(get()) }
+        viewModel { MainViewModel() }
     }
 }
