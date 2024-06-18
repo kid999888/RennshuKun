@@ -20,39 +20,57 @@ import com.example.rennshukun.view.main.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * MainFragment
+ *
+ * メイン画面を表示するフラグメント。このクラスは ViewPager2 と BottomNavigationView を使用して、
+ * ユーザーが異なる画面間をナビゲートできるようにします。
+ */
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override val viewModel: MainViewModel by viewModel()
     override fun getLayout() = R.layout.fragment_main
     override val createNewViewWhenBack: Boolean
         get() = false
 
+    /**
+     * フラグメントのビューが作成されたときに呼び出される。
+     *
+     * @param view フラグメントのビュー
+     * @param savedInstanceState 保存されたインスタンス状態
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewPage()
     }
 
+    /**
+     * ViewPager2 と BottomNavigationView を設定するメソッド。
+     */
     private fun setViewPage() {
         val viewPager: ViewPager2 = binding.viewPager
         val navView: BottomNavigationView = binding.navView
 
         val pagerAdapter = MainFragmentPagerAdapter(this)
         viewPager.adapter = pagerAdapter
-        
+
         navView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
                     viewPager.currentItem = 0
                     true
-                };
+                }
+
                 R.id.navigation_dashboard -> {
                     viewPager.currentItem = 1
                     true
-                };
+                }
+
                 R.id.navigation_notifications -> {
                     viewPager.currentItem = 2
                     true
-                };
-                else -> false;
+                }
+
+                else -> false
             }
         }
 
@@ -67,5 +85,4 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             }
         })
     }
-
 }

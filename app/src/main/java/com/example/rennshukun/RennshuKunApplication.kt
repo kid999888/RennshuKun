@@ -22,15 +22,17 @@ import org.koin.dsl.module
 /**
  * RennshuKunApplication
  *
+ * アプリケーションのエントリーポイントクラス。このクラスはアプリケーションの初期化を行い、
+ * Koin の依存性注入を設定します。
  */
 class RennshuKunApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
         startKoin {
-            // Log Koin into Android logger
+            // KoinをAndroidのロガーにログイン
             androidLogger()
-            // Reference Android context
+            // Android Contextを参照
             androidContext(this@RennshuKunApplication)
             modules(rennshuKunAppModule)
         }

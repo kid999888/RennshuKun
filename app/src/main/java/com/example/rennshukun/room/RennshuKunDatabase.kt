@@ -7,14 +7,32 @@ import androidx.room.RoomDatabase
 import com.example.rennshukun.room.dao.ApplicationManagementDao
 import com.example.rennshukun.room.model.ApplicationManagementEntity
 
+/**
+ * RennshuKunDatabase
+ *
+ * アプリケーションのデータベースクラス。このクラスはRoomデータベースを定義し、
+ * アプリケーション管理DAOへのアクセスを提供します。
+ */
 @Database(entities = [ApplicationManagementEntity::class], version = 1, exportSchema = false)
 abstract class RennshuKunDatabase : RoomDatabase() {
+
+    /**
+     * アプリケーション管理DAOを取得する抽象メソッド。
+     *
+     * @return ApplicationManagementDao
+     */
     abstract fun applicationManagementDao(): ApplicationManagementDao
 
     companion object {
         @Volatile
         private var INSTANCE: RennshuKunDatabase? = null
 
+        /**
+         * データベースのインスタンスを取得する。
+         *
+         * @param context コンテキスト
+         * @return RennshuKunDatabaseのインスタンス
+         */
         fun getDatabase(context: Context): RennshuKunDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
