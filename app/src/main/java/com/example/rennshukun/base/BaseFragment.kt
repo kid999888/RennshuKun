@@ -95,8 +95,9 @@ abstract class BaseFragment<TBinding : ViewDataBinding, TViewModel : BaseViewMod
     protected open fun setViewClickListener() {}
 
     /**
-     * ViewModel監視を設定する
+     * ViewModel の LiveData を監視する
      *
+     * @param viewLifecycleOwner ライフサイクルオーナー
      */
     protected open fun setViewModelObserve(viewLifecycleOwner: LifecycleOwner) {}
 

@@ -11,9 +11,9 @@ package com.example.rennshukun.view.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.rennshukun.view.main.dashboard.DashboardFragment
-import com.example.rennshukun.view.main.home.HomeFragment
-import com.example.rennshukun.view.main.notifications.NotificationsFragment
+import com.example.rennshukun.view.main.dashboard.fragment.DashboardFragment
+import com.example.rennshukun.view.main.home.fragment.HomeFragment
+import com.example.rennshukun.view.main.notification.fragment.NotificationFragment
 
 /**
  * MainFragmentPagerAdapter
@@ -41,7 +41,7 @@ class MainFragmentPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
         return when (position) {
             0 -> HomeFragment() // 位置0の場合、HomeFragmentを返す
             1 -> DashboardFragment() // 位置1の場合、DashboardFragmentを返す
-            2 -> NotificationsFragment() // 位置2の場合、NotificationsFragmentを返す
+            2 -> NotificationFragment() // 位置2の場合、NotificationFragmentを返す
             else -> throw IllegalStateException("Unexpected position $position")  // 想定外の位置の場合、例外を返す
         }
     }

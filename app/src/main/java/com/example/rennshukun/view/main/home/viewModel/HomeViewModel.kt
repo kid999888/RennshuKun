@@ -6,17 +6,17 @@
  * Copyright: © 2024 Gyoushin Ou. All rights reserved.
  * Description: This file implements...
  */
-package com.example.rennshukun.view.main.home
+package com.example.rennshukun.view.main.home.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.rennshukun.base.BaseViewModel
 
 /**
  * HomeViewModel
  *
  */
-class HomeViewModel : ViewModel() {
+class HomeViewModel : BaseViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"

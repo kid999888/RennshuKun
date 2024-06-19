@@ -11,6 +11,9 @@ package com.example.rennshukun
 import android.app.Application
 import com.example.rennshukun.repository.ApplicationManagementRepository
 import com.example.rennshukun.room.RennshuKunDatabase
+import com.example.rennshukun.view.main.dashboard.viewModel.DashboardViewModel
+import com.example.rennshukun.view.main.home.viewModel.HomeViewModel
+import com.example.rennshukun.view.main.notification.viewModel.NotificationViewModel
 import com.example.rennshukun.view.main.viewModel.MainViewModel
 import com.example.rennshukun.view.splash.viewModel.SplashViewModel
 import org.koin.android.ext.koin.androidContext
@@ -51,5 +54,8 @@ class RennshuKunApplication : Application() {
         // ViewModel
         viewModel { SplashViewModel(get()) }
         viewModel { MainViewModel() }
+        viewModel { HomeViewModel() }
+        viewModel { DashboardViewModel() }
+        viewModel { NotificationViewModel() }
     }
 }

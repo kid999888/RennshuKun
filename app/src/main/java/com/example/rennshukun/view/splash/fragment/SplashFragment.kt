@@ -60,7 +60,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
                     .setPopUpTo(R.id.splash_fragment, true)
                     .build()
                 navController.navigate(R.id.action_splash_to_main_fragment, null, navOptions)
-            }, 2000)
+            }, 1000)
         })
     }
 }
